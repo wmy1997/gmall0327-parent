@@ -13,6 +13,7 @@
         <module>gmall0327-mock</module>
         <module>gmall0327-logger</module>
         <module>gmall0327-realtime</module>
+        <module>gmall0327-canal</module>
     </modules>
 
     <parent>

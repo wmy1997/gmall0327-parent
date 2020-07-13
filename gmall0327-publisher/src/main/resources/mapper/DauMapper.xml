@@ -11,6 +11,7 @@
       group by loghour
     </select>
     <resultMap id="dauResultMap" type="java.util.Map">
+        <!--property是map的k column是对应sql语句中查询字段的值，也是map的v -->
         <result property="loghour" column="LOGHOUR"></result>
         <result property="ct" column="CT"></result>
     </resultMap>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wmy.gmall0327.publisher.mapper.OrderMapper">
+    <select id="selectOrderAmount" resultType="java.lang.Double">
+        select sum(total_amount) from gmall0327_order_info
+        where create_date=#{date}
+    </select>
+
+    <select id="selectOrderAmountHour" resultMap="orderResultMap">
+        select create_hour,sum(total_amount) order_amount from gmall0327_order_info
+        where create_date=#{date}
+        group by create_hour
+    </select>
+    <resultMap id="orderResultMap" type="java.util.Map" autoMapping="true">
+        <!-- 当property和column映射字段一样时 可用autoMapping代替下面-->
+        <!--<result property="CREATE_HOUR" column="CREATE_HOUR"></result>-->
+        <!--<result property="ORDER_MOUNT" column="ORDER_MOUNT"></result>-->
+    </resultMap>
+</mapper>

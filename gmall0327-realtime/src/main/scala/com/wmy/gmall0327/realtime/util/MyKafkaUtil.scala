@@ -3,17 +3,20 @@ package com.wmy.gmall0327.realtime.util
 import org.apache.kafka.common.serialization.StringDeserializer
 import java.util.Properties
 
-import org.apache.kafka.clients.consumer.ConsumerRecord
+import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecord}
 import org.apache.spark.streaming.StreamingContext
 import org.apache.spark.streaming.dstream.InputDStream
 import org.apache.spark.streaming.kafka010.{ConsumerStrategies, KafkaUtils, LocationStrategies}
 
 object MyKafkaUtil {
   private val properties: Properties = PropertiesUtil.load("config.properties")
-  val broker_list = properties.getProperty("kafka.broker.list")
+  val broker_list: String = properties.getProperty("kafka.broker.list")
 
   // kafka消费者配置
   val kafkaParam = Map(
+//    ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG-> 建议这种方式好点，方式自定义的string内容写错
+//      ConsumerConfig.GROUP_ID_CONFIG
+
     "bootstrap.servers" -> broker_list, //用于初始化链接到集群的地址
     "key.deserializer" -> classOf[StringDeserializer],
     "value.deserializer" -> classOf[StringDeserializer],
